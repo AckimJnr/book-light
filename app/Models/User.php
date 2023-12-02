@@ -17,8 +17,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $primaryKey = 'user_id';
-    protected $fillable = ['account_id', 'fullname', 'email', 'password'];
+    protected $table = 'users';
+	protected $primaryKey = 'account_id';
+	public $incrementing = false;
+	public $timestamps = true;
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -35,13 +37,16 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'user_id' => 'int',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
-    public function roles()
+    protected $fillable = ['user_id', 'full_name', 'email', 'password'];
+
+    public function role()
     {
-        return $this->hasMany(Role::class, 'account_id', 'account_id');
+        return $this->hasOne(Role::class, 'account_id', 'account_id');
     }
 
     public function books()

@@ -25,4 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     'roles' => RoleController::class,
 //     'book-accesses' => BookAccessController::class,
 // ]);
-Route::get('users', [UserController::class, 'index']);
+Route::apiResource('users', UserController::class);
