@@ -18,7 +18,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $table = 'users';
-	protected $primaryKey = 'account_id';
+	protected $primaryKey = 'user_id';
+    protected $foreignKey = 'account_id';
 	public $incrementing = false;
 	public $timestamps = true;
     /**
