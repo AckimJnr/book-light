@@ -7,7 +7,9 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
@@ -34,9 +36,27 @@ class UserController extends Controller
     {
         $validated = $request->validated();
 
-        $user = User::create($validated);
+        try{
+            DB::beginTransaction();
+            $user = User::create($validated);
 
-        return new UserResource($user);
+            $role = new Role([
+                    'account_id' => $user->account_id,
+                    'role_name' => 'reader',
+            ]);
+            $user->role()->save($role);
+
+             DB::commit();
+
+            return new UserResource($user);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'User creation failed.'], 500);
+        }
+
+        
+        
     }
 
     public function update(UpdateUserRequest $request, User $user)

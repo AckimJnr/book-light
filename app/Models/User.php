@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -20,7 +21,7 @@ class User extends Authenticatable
     protected $table = 'users';
 	protected $primaryKey = 'user_id';
     protected $foreignKey = 'account_id';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = true;
     /**
      * The attributes that should be hidden for serialization.
@@ -59,4 +60,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(BookAccess::class, 'account_id', 'account_id');
     }
+
+    // protected static function booted(): void
+    // {
+    //     static::addGlobalScope('account_id', function (Builder $builder) {
+    //         $builder->where('account_id', auth()->user()->account_id);
+    //     });
+    // }
 }
