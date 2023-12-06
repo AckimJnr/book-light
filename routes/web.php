@@ -19,7 +19,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('/profile', [AuthController::class, 'user_profile_view'])->name('profile');
 Route::post('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
 Route::get('/register', [AuthController::class, 'register_view'])->name('register');

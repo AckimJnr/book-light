@@ -76,4 +76,9 @@ class AuthController extends Controller
     {
         return view('authentication.register');
     }
+
+    public function user_profile_view()
+    {
+        return view('profile.user.home');
+    }
 }
