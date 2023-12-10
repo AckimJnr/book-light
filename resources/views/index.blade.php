@@ -17,5 +17,6 @@
 
         <!--use include footer here -->
         @include('common_elements.footer')
-    </body> 
+        
+    </body>
 </html>
