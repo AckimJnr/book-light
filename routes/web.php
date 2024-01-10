@@ -23,3 +23,13 @@ Route::get('/profile', [AuthController::class, 'user_profile_view'])->name('prof
 Route::post('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
 Route::get('/register', [AuthController::class, 'register_view'])->name('register');
+Route::get('/explore', [AuthController::class, 'explore'])->name('explore');
+
+// Route for the shelf
+Route::get('/shelf', [AuthController::class, 'shelf'])->name('shelf');
+
+// Route for the inbox
+Route::get('/inbox', [AuthController::class, 'inbox'])->name('inbox');
+
+// Route for the user profile
+Route::get('/me', [AuthController::class, 'me'])->name('me');

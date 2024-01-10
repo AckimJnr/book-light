@@ -81,4 +81,25 @@ class AuthController extends Controller
     {
         return view('profile.user.home');
     }
+
+    public function explore()
+    {
+        return view('profile.user.explore');
+    }
+
+    public function shelf()
+    {
+        return view('profile.user.shelf');
+    }
+
+    public function inbox()
+    {
+        return view('profile.user.inbox');
+    }
+
+    public function me()
+    {
+        return view('profile.user.me');
+    }
+
 }
