@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,16 +8,16 @@
     <script src="/js/config.js"></script>
     @vite('resources/css/app.css')
 </head>
-
 <body>
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <a href="{{route('home')}}"><img class="mx-auto h-20 w-auto" src="{{asset('images/booklight.png')}}" alt="Book Light"></a>
+            <a href="{{ route('home') }}"><img class="mx-auto h-20 w-auto" src="{{ asset('images/booklight.png') }}" alt="Book Light"></a>
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
+            <form class="space-y-6" action="{{ route('login') }}" method="POST">
+                @csrf <!-- CSRF token -->
                 <div>
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div class="mt-2">
@@ -41,15 +40,30 @@
                 <div>
                     <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
                 </div>
+                <!-- Display errors -->
+                @if ($errors->any())
+                    <div class="text-red-500 text-sm">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </form>
 
             <p class="mt-10 text-center text-sm text-gray-500">
                 Don't have an account?
-                <a href="{{route('register')}}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Create an account</a>
+                <a href="{{ route('register') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Create an account</a>
             </p>
         </div>
     </div>
 
+    <!-- Redirect to /profile if login successful -->
+    <script>
+        @if(session('status') == 'success')
+            window.location = "{{ route('profile') }}";
+        @endif
+    </script>
 </body>
-
 </html>
