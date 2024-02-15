@@ -18,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 book_light_db.sql
+package-lock.json
