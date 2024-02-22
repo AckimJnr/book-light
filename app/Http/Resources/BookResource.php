@@ -13,6 +13,7 @@ class BookResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $hasAccess = $this->bookAccess()->where('account_id', auth()->id())->exists();
         return [
             'id' => $this->book_id,
             'title' => $this->title,
@@ -23,6 +24,7 @@ class BookResource extends JsonResource
             'published_date' => $this->published_date,
             'book_url' => $this->book_url,
             'author' => $this->author_name,
+            'has_access'=> $hasAccess,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
