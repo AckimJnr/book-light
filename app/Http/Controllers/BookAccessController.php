@@ -25,16 +25,24 @@ class BookAccessController extends Controller
 
     public function show(Request $request, BookAccess $book_access)
     {
-
+        return new BookAccessResource($book_access);
     }
 
     public function store(StoreBookAccessRequest $request)
     {
+            $validated = $request->validated();
 
+            $book_access = BookAccess::create($validated);
+
+            return new BookAccessResource($book_access);
     }
 
     public function update(UpdateBookAccessRequest $request, BookAccess $book_access)
     {
+        $validated = $request->validated();
 
+        $book_access->update($validated);
+
+        return new BookAccessResource($book_access);
     }
 }

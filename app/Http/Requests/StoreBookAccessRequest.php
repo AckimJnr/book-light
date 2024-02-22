@@ -22,7 +22,7 @@ class StoreBookAccessRequest extends FormRequest
     {
         return [
             'book_id' => 'required|integer|exists:books,book_id',
-            'user_id' => 'required|integer|exists:users,user_id',
+            'account_id' => 'required|string|exists:users,account_id',
         ];
     }
 }
