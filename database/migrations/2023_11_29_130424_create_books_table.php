@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('total_pages')->nullable();
             $table->string('cover_image')->nullable();
             $table->string('description')->nullable();
+            $table->float('price', 8,2);
             $table->string('author_name')->nullable();
             $table->string('isbn')->nullable();
             $table->string('publisher')->nullable();
