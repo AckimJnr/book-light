@@ -44,7 +44,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $fillable = ['user_id', 'full_name', 'email', 'password'];
+    protected $fillable = ['user_id', 'name', 'email', 'password'];
 
     public function role()
     {
